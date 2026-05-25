@@ -1,0 +1,21 @@
+def triangle_number(K5min):
+    for n in range(21):
+        s = ''
+        for r in range(n+1):
+            if len(K5min[(r, n-r)]) == 0:
+                s = s + '\t0'
+            else:
+                for matroid in K5min[(r, n-r)]:
+                    min_triangle = 20
+                    triangle_num = 0
+                    count = 0
+                    for circuit in matroid.circuits():
+                        if len(circuit) == 3:
+                            count += 1
+                    if count > 0 :
+                        triangle_num = (3 * count) / (n + r)
+                        count = 0
+                    if min_triangle > triangle_num:
+                        min_triangle = triangle_num
+                s = s + '\t' + str(min_triangle)
+        print s

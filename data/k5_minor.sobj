@@ -1,0 +1,22 @@
+K5min = load("/home/kyle/Desktop/K5Rank7.sobj")
+
+for n in range(21):
+    s = ''
+    for r in range(n+1):
+        if len(K5min[(r, n-r)]) == 0:
+                s = s + '\t0'
+        else:
+            for matroid in K5min[(r, n-r)]:
+                min_triangle_num = 100 #arbitrarily large
+                triangle_num = 0
+                count = 0
+                for circuit in matroid.circuits():
+                    if len(circuit) == 3:
+                        count += 1
+                if count > 0 :
+                    triangle_num = (3 * count) / n
+                    count = 0
+                if min_triangle_num > triangle_num:
+                    min_triangle_num = triangle_num
+            s = s + '\t' + str(min_triangle_num)
+    print s

@@ -1,0 +1,18 @@
+#circumference
+
+for n in range(23):
+    s = ''
+    for r in range(n+1):
+        min = r + 1
+        if len(K5min[(r, n-r)]) == 0:
+            s = s + ' 0'
+        else:
+            for matroid in K5min[(r, n-r)]:
+                max = 0
+                for circuit in matroid.circuits():
+                    if max < len(circuit):
+                        max = len(circuit)
+                if max < min:
+                    min = max   
+            s = s + ' ' + str(min)
+    print s

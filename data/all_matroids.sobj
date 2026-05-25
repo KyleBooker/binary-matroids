@@ -1,0 +1,23 @@
+def all_matroids(field, maxsize, maxrank):
+    D = {}
+    D[(0,0)] = [Matroid(field=field, groundset=[], matrix=[[]])]
+    for n in range(1, maxsize + 1):
+        e = n
+        D[(0,n)] = []
+        for r in range(n):
+            for M in D[(r, n - 1 -r )]:
+                if M.rank() < maxrank + 1:
+                    S = [N for N in M.linear_extensions(element=e, simple=True) if e in list (N._weak_partition())[-1]]
+                    for N in S:
+                        if not any(N.is_field_isomorphic(NN) for NN in D[(r, n-r)]):
+                            D[(r, n-r)].append(N)
+            D[(r + 1, n - 1 - r)] = [M.linear_coextension(e, cochain={f:0 for f in M.groundset()}) for M in D[(r, n -1 - r)] if M.rank() <maxrank]
+    return D
+
+BM = all_matroids(GF(2), 10, 6)
+
+for n in range(11):
+    s = ''
+    for r in range(n + 1):
+        s = s + ' ' + str(len(BM[(r, n-r)]))
+    print s
