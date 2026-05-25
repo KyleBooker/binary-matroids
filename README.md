@@ -102,9 +102,9 @@ Triangle counts, plotted across rank/size:
 
 ![Matroid triangle plot](docs/matroid-triangle.png)
 
-## Paper
+## Results
 
-The accompanying write-up is available in [docs/](docs/binary-matroids-without-k5-minor.pdf). It walks through the bounding argument in detail and contextualizes the computational results.
+The accompanying code and results are located in [docs/](docs/binary-matroids-without-k5-minor.pdf).
 
 ## Notes and limitations
 
